@@ -4,7 +4,7 @@ public class ProgrammeMSAssignment {
 
     public static void main(String[] args) {
         // Liang was here
-        System.out.println("test");
+        System.out.println("tffffest");
     }
     //test 123
 }
