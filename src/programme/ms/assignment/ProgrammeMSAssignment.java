@@ -47,6 +47,8 @@ public class ProgrammeMSAssignment {
     }
 
     public static void entContinue() {
+        Scanner scanner = new Scanner(System.in);
+        
         System.out.println("Press enter to continue...");
         try
         {
