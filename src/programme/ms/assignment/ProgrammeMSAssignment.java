@@ -50,7 +50,7 @@ public class ProgrammeMSAssignment {
         System.out.println("Press enter to continue...");
         try
         {
-            System.in.read();
+            scanner.nextLine();
         }  
         catch(Exception e)
         {}  
