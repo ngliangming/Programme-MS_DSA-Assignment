@@ -20,9 +20,9 @@ public class SortingDriver {
         do {
 //            faculty.display();
             System.out.println("\nPlease select a list that you want to add and sort\n"
-                    + "1. View Faculty\n"
+                    + "1. View Faculties\n"
                     + "2. Add new Faculty\n"
-                    + "3. Sort Faculty\n"
+                    + "3. Sort Faculties\n"
                     + "0. Main Menu\n");
             System.out.printf("> ");
 
