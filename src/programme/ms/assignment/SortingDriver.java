@@ -7,7 +7,6 @@ import entity.Faculty;
 /**
  *
  * @author kahhim
- * @reviewed liangming
  */
 public class SortingDriver {
 
