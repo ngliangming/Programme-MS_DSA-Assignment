@@ -11,6 +11,9 @@ public class Lecturer implements Comparable<Lecturer> {
     private String phoneNumber;
     private String email;
 
+    public Lecturer() {
+    }
+
     public Lecturer(int staffId, String name, String phoneNumber, String email) {
         this.staffId = staffId;
         this.name = name;
@@ -61,6 +64,12 @@ public class Lecturer implements Comparable<Lecturer> {
 
     @Override
     public int compareTo(Lecturer l) {
-        return name.compareTo(l.name);
+        if (staffId < l.staffId) {
+            return -1;
+        } else if (staffId > l.staffId) {
+            return 1;
+        } else {
+            return 0;
+        }
     }
 }
