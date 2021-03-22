@@ -1,20 +1,21 @@
 package programme.ms.assignment;
 
-import entity.Faculty;
 import java.util.Scanner;
-import static programme.ms.assignment.SortingDriver.faculty;
-import static programme.ms.assignment.SortingDriver.sortmenu;
+import Adt.*;
+import entity.*;
+import static programme.ms.assignment.SortingDriver.*;  
 
 public class ProgrammeMSAssignment {
+    public static SortedInterface<Faculty> faculty = new SortingList<Faculty>();
 
     public static void main(String[] args) {
         //Initialize data
         //Faculty
-        faculty.add(new Faculty("FOCS", "Faculty of Computing and Information Technology"));
+        faculty.add(new Faculty("FAFB", "Faculty of Accounting"));
         faculty.add(new Faculty("FOAS", "Faculty of Applied Science"));
-        faculty.add(new Faculty("FAFB", "Faculty of accounting"));
         faculty.add(new Faculty("FOET", "Faculty of Engineering and Technology"));
         faculty.add(new Faculty("FSSH", "Faculty of Social Science and Humanities"));
+        faculty.add(new Faculty("FOCS", "Faculty of Computing and Information Technology"));
         faculty.add(new Faculty("FCCI", "Faculty of Communication and Creative Industries"));
 
         //Declaration
@@ -25,14 +26,14 @@ public class ProgrammeMSAssignment {
         //  Loop/Run System
         do {
             System.out.println("==========Programme Management System==========\n"
-                    + "1. Sorting List\n"
+                    + "1. Faculty (Sorting List)\n"
                     + "0. Exit\n");
             System.out.printf("> ");
 
             selection = scanner.nextLine();
             switch (selection) {
                 case "0":
-                    System.out.println("Exiting System");
+                    System.out.println("\nExiting System...");
                     exit = true;
                     break;
                 case "1":

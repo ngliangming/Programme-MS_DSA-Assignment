@@ -39,7 +39,7 @@ public class SortingList <T extends Comparable<T>> implements SortedInterface<T>
 
     @Override
     public void display() {
-         System.out.printf("------------sorting list-----------------------\n");
+         System.out.printf("------------sorting list------------\n");
         for (int index = 0; index < length; ++index) {   
            System.out.printf("%3d. %-50s\n", index + 1, sortlist[index]);           
         }
