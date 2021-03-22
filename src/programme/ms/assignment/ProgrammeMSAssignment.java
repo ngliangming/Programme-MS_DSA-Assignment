@@ -2,8 +2,8 @@ package programme.ms.assignment;
 
 import entity.Faculty;
 import java.util.Scanner;
-import static programme.ms.assignment.testSorting.faculty;
-import static programme.ms.assignment.testSorting.sortmenu;
+import static programme.ms.assignment.SortingDriver.faculty;
+import static programme.ms.assignment.SortingDriver.sortmenu;
 
 public class ProgrammeMSAssignment {
 

@@ -10,7 +10,7 @@ import static programme.ms.assignment.ProgrammeMSAssignment.entContinue;
  *
  * @author kahhim
  */
-public class testSorting {
+public class SortingDriver {
 
     public static SortedInterface<Faculty> faculty = new SortingList<Faculty>();
     public static Scanner scanner = new Scanner(System.in);
