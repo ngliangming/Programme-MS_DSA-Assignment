@@ -8,9 +8,8 @@ import static programme.ms.assignment.BinaryTreeDriver.binaryTreeMenu;
 
 public class ProgrammeMSAssignment {
 
-    public static BinaryTreeSearchInterface<Lecturer> lecturer = new BinaryTreeSearchAdt<Lecturer>();
-    public static BinaryTreeSearchInterface<Faculty> bFaculty = new BinaryTreeSearchAdt<Faculty>();
     public static SortedInterface<Faculty> faculty = new SortingList<Faculty>();
+    public static BinaryTreeSearchInterface<Lecturer> lecturer = new BinaryTreeSearchAdt<Lecturer>();
 
     public static void main(String[] args) {
         //Initialize data
