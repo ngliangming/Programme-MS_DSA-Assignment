@@ -32,7 +32,6 @@ public class SortingDriver {
                     break;
                 case "1":
                     faculty.display();
-                    System.out.println("");
                     entContinue();
                     break;
                 case "2":
@@ -93,7 +92,6 @@ public class SortingDriver {
     public static void sortfaculty() {
         faculty.bubbleSort();
         faculty.display();
-        System.out.println("");
         entContinue();
     }
 }

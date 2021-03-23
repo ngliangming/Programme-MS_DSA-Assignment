@@ -14,7 +14,7 @@ public interface BinaryTreeSearchInterface<T extends Comparable<T>> {
     public T getEntry(T entry);
     //Gets entry
     
-    public T add(T newEntry, String key);
+    public T add(T newEntry, String key, int id);
     //Add new entry
 
     public T remove(T entry);

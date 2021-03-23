@@ -36,19 +36,19 @@ public class BinaryTreeSearchAdt<T extends Comparable<T>> implements BinaryTreeS
     }
 
     @Override
-    public T add(T newEntry, String name) {
+    public T add(T newEntry, String name, int id) {
         T result = null;
 
         if (isEmpty()) {
-            root = new Node(newEntry, name);
+            root = new Node(newEntry, name, id);
         } else {
-            result = addEntry(root, newEntry, name);
+            result = addEntry(root, newEntry, name, id);
         }
 
         return result;
     }
 
-    private T addEntry(Node rootNode, T newEntry, String name) {
+    private T addEntry(Node rootNode, T newEntry, String name, int id) {
         T result = null;
         int comparison = newEntry.compareTo(rootNode.data);
 
@@ -57,15 +57,15 @@ public class BinaryTreeSearchAdt<T extends Comparable<T>> implements BinaryTreeS
             rootNode.data = newEntry;
         } else if (comparison < 0) {
             if (rootNode.left != null) {
-                result = addEntry(rootNode.left, newEntry, name);
+                result = addEntry(rootNode.left, newEntry, name, id);
             } else {
-                rootNode.left = new Node(newEntry, name);
+                rootNode.left = new Node(newEntry, name, id);
             }
         } else {
             if (rootNode.right != null) {
-                result = addEntry(rootNode.right, newEntry, name);
+                result = addEntry(rootNode.right, newEntry, name, id);
             } else {
-                rootNode.right = new Node(newEntry, name);
+                rootNode.right = new Node(newEntry, name, id);
             }
         }
         return result;
@@ -150,10 +150,12 @@ public class BinaryTreeSearchAdt<T extends Comparable<T>> implements BinaryTreeS
     @Override
     public void DisplayInOrderIterator(Node node) {
         if (node.left != null) {
+            System.out.println("");
             this.DisplayInOrderIterator(node.left);
         }
         System.out.println(node.data);
         if (node.right != null) {
+            System.out.println("");
             this.DisplayInOrderIterator(node.right);
         }
     }
@@ -196,21 +198,27 @@ public class BinaryTreeSearchAdt<T extends Comparable<T>> implements BinaryTreeS
         public Node left;
         public Node right;
         public String key;
+        public int id;
 
         public boolean matches(String key) {
             return this.key.toUpperCase().matches("(.*)" + key.toUpperCase() + "(.*)");
         }
 
+        public boolean matches(int id) {
+            return this.id == id;
+        }
+
         public Node() {
         }
 
-        private Node(T dataPortion, String key) {
-            this(dataPortion, key, null, null);
+        private Node(T dataPortion, String key, int id) {
+            this(dataPortion, key, id, null, null);
         }
 
-        private Node(T data, String name, Node left, Node right) {
+        private Node(T data, String key, int id, Node left, Node right) {
             this.data = data;
-            this.key = name;
+            this.key = key;
+            this.id = id;
             this.left = left;
             this.right = right;
         }

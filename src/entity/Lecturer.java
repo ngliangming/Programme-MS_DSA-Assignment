@@ -6,6 +6,7 @@ package entity;
  */
 public class Lecturer implements Comparable<Lecturer> {
 
+    public static int idIndex = 1001;
     private int staffId;
     private String name;
     private String phoneNumber;
@@ -14,8 +15,8 @@ public class Lecturer implements Comparable<Lecturer> {
     public Lecturer() {
     }
 
-    public Lecturer(int staffId, String name, String phoneNumber, String email) {
-        this.staffId = staffId;
+    public Lecturer(String name, String phoneNumber, String email) {
+        this.staffId = idIndex;
         this.name = name;
         this.phoneNumber = phoneNumber;
         this.email = email;
@@ -57,7 +58,7 @@ public class Lecturer implements Comparable<Lecturer> {
     public String toString() {
         return String.format("Staff ID: %d\n"
                 + "Name: %s\n"
-                + "Phone number: %s"
+                + "Phone number: %s\n"
                 + "Email: %s",
                 staffId, name, phoneNumber, email);
     }
@@ -72,4 +73,5 @@ public class Lecturer implements Comparable<Lecturer> {
             return 0;
         }
     }
+
 }
