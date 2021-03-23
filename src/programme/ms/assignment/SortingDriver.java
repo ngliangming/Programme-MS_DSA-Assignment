@@ -1,18 +1,15 @@
 package programme.ms.assignment;
 
-import Adt.SortingList;
-import Adt.SortedInterface;
 import java.util.Scanner;
+import static programme.ms.assignment.ProgrammeMSAssignment.*;
 import entity.Faculty;
-import static programme.ms.assignment.ProgrammeMSAssignment.entContinue;
 
 /**
  *
  * @author kahhim
  */
-public class testSorting {
+public class SortingDriver {
 
-    public static SortedInterface<Faculty> faculty = new SortingList<Faculty>();
     public static Scanner scanner = new Scanner(System.in);
 
     public static void sortmenu() {
@@ -20,23 +17,28 @@ public class testSorting {
         String selection;
 
         do {
-            faculty.display();
+//            faculty.display();
             System.out.println("\nPlease select a list that you want to add and sort\n"
-                    + "1. Add new Faculty\n"
-                    + "2. Sort Faculty\n"
+                    + "1. View Faculties\n"
+                    + "2. Add new Faculty\n"
+                    + "3. Sort Faculties\n"
                     + "0. Main Menu\n");
             System.out.printf("> ");
 
             selection = scanner.nextLine();
             switch (selection) {
                 case "0":
-                    System.out.println("\n\n");
                     exit = true;
                     break;
                 case "1":
-                    Faculty();
+                    faculty.display();
+                    System.out.println("");
+                    entContinue();
                     break;
                 case "2":
+                    Faculty();
+                    break;
+                case "3":
                     sortfaculty();
                     break;
                 default:
