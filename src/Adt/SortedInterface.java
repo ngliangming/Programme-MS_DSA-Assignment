@@ -13,6 +13,7 @@ public interface SortedInterface <T extends Comparable<T>>{
     public void add(T newEntry);
     public void bubbleSort();
     public void display();
+    public void clear();
     public boolean isEmpty();
     public boolean isFull();
 }

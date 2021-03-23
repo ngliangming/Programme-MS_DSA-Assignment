@@ -15,8 +15,8 @@ public class Lecturer implements Comparable<Lecturer> {
     public Lecturer() {
     }
 
-    public Lecturer(String name, String phoneNumber, String email) {
-        this.staffId = idIndex;
+    public Lecturer(int staffId, String name, String phoneNumber, String email) {
+        this.staffId = staffId;
         this.name = name;
         this.phoneNumber = phoneNumber;
         this.email = email;

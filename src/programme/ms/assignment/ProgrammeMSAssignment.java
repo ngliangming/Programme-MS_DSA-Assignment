@@ -1,35 +1,20 @@
 package programme.ms.assignment;
 
 import java.util.Scanner;
-import Adt.*;
 import entity.*;
+import java.util.ArrayList;
+import java.util.List;
 import static programme.ms.assignment.SortingDriver.sortmenu;
 import static programme.ms.assignment.BinaryTreeDriver.binaryTreeMenu;
 
 public class ProgrammeMSAssignment {
-
-    public static SortedInterface<Faculty> faculty = new SortingList<Faculty>();
-    public static BinaryTreeSearchInterface<Lecturer> lecturer = new BinaryTreeSearchAdt<Lecturer>();
+    //Glogal array lists for global access to all data
+    public static List<Faculty> facultyList = new ArrayList();
+    public static List<Lecturer> lecturerList = new ArrayList();
 
     public static void main(String[] args) {
-        //Initialize data
-        //Generate Faculty
-        faculty.add(new Faculty("FAFB", "Faculty of Accounting"));
-        faculty.add(new Faculty("FOAS", "Faculty of Applied Science"));
-        faculty.add(new Faculty("FOET", "Faculty of Engineering and Technology"));
-        faculty.add(new Faculty("FSSH", "Faculty of Social Science and Humanities"));
-        faculty.add(new Faculty("FOCS", "Faculty of Computing and Information Technology"));
-        faculty.add(new Faculty("FCCI", "Faculty of Communication and Creative Industries"));
-
-        //Generate Lecturer
-        lecturer.add(new Lecturer("Keith", "012-255-5312", "keith_jt@gmail.com"), "Keith", new Lecturer().idIndex++);
-        lecturer.add(new Lecturer("Rylie", "012-364-8912", "rylie_o@gmail.com"), "Rylie", new Lecturer().idIndex++);
-        lecturer.add(new Lecturer("Jenson", "012-123-4845", "jenson_jnsn@gmail.com"), "Jenson", new Lecturer().idIndex++);
-        lecturer.add(new Lecturer("Kyle", "017-568-7481", "kl_chd@gmail.com"), "Kyle", new Lecturer().idIndex++);
-        lecturer.add(new Lecturer("James", "012-126-4895", "james_vi@gmail.com"), "James", new Lecturer().idIndex++);
-        lecturer.add(new Lecturer("Josaphine", "012-165-7821", "jsphn_tuit@gmail.com"), "Josaphine", new Lecturer().idIndex++);
-        lecturer.add(new Lecturer("Adam", "016-665-8942", "adm_jnsn@gmail.com"), "Adam", new Lecturer().idIndex++);
-        lecturer.add(new Lecturer("Jason", "017-134-4953", "jason_v@gmail.com"), "Jason", new Lecturer().idIndex++);
+        //Initialize all data
+        initializeData();
 
         //Declaration
         Scanner scanner = new Scanner(System.in);
@@ -64,6 +49,29 @@ public class ProgrammeMSAssignment {
         } while (!exit);
     }
 
+    private static void initializeData() {
+        //Initialize data
+        
+        //Generate Faculty array list
+        facultyList.add(new Faculty("FAFB", "Faculty of Accounting"));
+        facultyList.add(new Faculty("FOAS", "Faculty of Applied Science"));
+        facultyList.add(new Faculty("FOET", "Faculty of Engineering and Technology"));
+        facultyList.add(new Faculty("FSSH", "Faculty of Social Science and Humanities"));
+        facultyList.add(new Faculty("FOCS", "Faculty of Computing and Information Technology"));
+        facultyList.add(new Faculty("FCCI", "Faculty of Communication and Creative Industries"));
+        
+        //Generate Lecturer array list
+        lecturerList.add(new Lecturer(Lecturer.idIndex++ ,"Keith", "012-255-5312", "keith_jt@gmail.com"));
+        lecturerList.add(new Lecturer(Lecturer.idIndex++, "Rylie", "012-364-8912", "rylie_o@gmail.com"));
+        lecturerList.add(new Lecturer(Lecturer.idIndex++, "Jenson", "012-123-4845", "jenson_jnsn@gmail.com"));
+        lecturerList.add(new Lecturer(Lecturer.idIndex++, "Kyle", "017-568-7481", "kl_chd@gmail.com"));
+        lecturerList.add(new Lecturer(Lecturer.idIndex++, "James", "012-126-4895", "james_vi@gmail.com"));
+        lecturerList.add(new Lecturer(Lecturer.idIndex++, "Josaphine", "012-165-7821", "jsphn_tuit@gmail.com"));
+        lecturerList.add(new Lecturer(Lecturer.idIndex++, "Adam", "016-665-8942", "adm_jnsn@gmail.com"));
+        lecturerList.add(new Lecturer(Lecturer.idIndex++, "Jason", "017-134-4953", "jason_v@gmail.com"));
+    }
+
+    //Function for "Press enter to continue..." for users to read displays before proceeding
     public static void entContinue() {
         Scanner scanner = new Scanner(System.in);
 

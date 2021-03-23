@@ -81,4 +81,9 @@ public class SortingList<T extends Comparable<T>> implements SortedInterface<T> 
         return outputStr;
     }
 
+    @Override
+    public void clear() {
+        length = 0;        
+    }
+
 }

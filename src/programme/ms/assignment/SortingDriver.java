@@ -1,18 +1,27 @@
 package programme.ms.assignment;
 
-import java.util.Scanner;
+import Adt.SortedInterface;
+import Adt.SortingList;
 import static programme.ms.assignment.ProgrammeMSAssignment.*;
 import entity.Faculty;
+import java.util.Scanner;
 
 /**
  *
  * @author kahhim
  */
 public class SortingDriver {
+    public static SortedInterface<Faculty> faculty = new SortingList<Faculty>();
 
     public static Scanner scanner = new Scanner(System.in);
 
     public static void sortmenu() {
+        faculty.clear();
+        
+        for (int i = 0; i < facultyList.size(); i++) {
+            faculty.add(new Faculty(facultyList.get(i).getFCode(), facultyList.get(i).getFName()));
+        }
+
         boolean exit = false;
         String selection;
 
@@ -50,7 +59,7 @@ public class SortingDriver {
     public static void Faculty() {
         System.out.println("Faculty list:");
         faculty.display();
-        String selection = "";
+        String selection;
         boolean again = true;
 
         do {
@@ -60,6 +69,7 @@ public class SortingDriver {
             System.out.println("\nEnter a add new Faculty name:");
             String name = scanner.nextLine();
             faculty.add(new Faculty(code, name));
+            facultyList.add(new Faculty(code, name));
 
             boolean validOption;
             do {

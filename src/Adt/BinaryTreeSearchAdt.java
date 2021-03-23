@@ -72,82 +72,6 @@ public class BinaryTreeSearchAdt<T extends Comparable<T>> implements BinaryTreeS
     }
 
     @Override
-    public T remove(T entry) {
-        ReturnObject oldEntry = new ReturnObject(null);
-
-        Node newRoot = removeEntry(root, entry, oldEntry);
-
-        root = newRoot;
-
-        return oldEntry.get();
-    }
-
-    private Node removeEntry(Node rootNode, T entry, ReturnObject oldEntry) {
-        if (rootNode != null) {
-            T rootData = rootNode.data;
-            int comparison = entry.compareTo(rootData);
-
-            if (comparison == 0) {      // entry == root entry
-                oldEntry.set(rootData);
-                rootNode = removeFromRoot(rootNode);
-            } else if (comparison < 0) {  // entry < root entry
-                Node leftChild = rootNode.left;
-                Node subtreeRoot = removeEntry(leftChild, entry, oldEntry);
-                rootNode.left = subtreeRoot;
-            } else {                      // entry > root entry
-                Node rightChild = rootNode.right;
-                rootNode.right = removeEntry(rightChild, entry, oldEntry);
-            }
-        }
-
-        return rootNode;
-    }
-
-    private Node removeFromRoot(Node rootNode) {
-        // Case 1: rootNode has two children
-        if (rootNode.left != null && rootNode.right != null) {
-            // find node with largest entry in left subtree
-            Node leftSubtreeRoot = rootNode.left;
-            Node largestNode = findLargest(leftSubtreeRoot);
-
-            // replace entry in root
-            rootNode.data = largestNode.data;
-
-            // remove node with largest entry in left subtree
-            rootNode.left = removeLargest(leftSubtreeRoot);
-        } // end if
-        // Case 2: rootNode has at most one child
-        else if (rootNode.right != null) {
-            rootNode = rootNode.right;
-        } else {
-            rootNode = rootNode.left;
-        }
-
-        // Assertion: if rootNode was a leaf, it is now null
-        return rootNode;
-    }
-
-    private Node findLargest(Node rootNode) {
-        if (rootNode.right != null) {
-            rootNode = findLargest(rootNode.right);
-        }
-
-        return rootNode;
-    }
-
-    private Node removeLargest(Node rootNode) {
-        if (rootNode.right != null) {
-            Node rightChild = rootNode.right;
-            Node root = removeLargest(rightChild);
-            rootNode.right = root;
-        } else {
-            rootNode = rootNode.left;
-        }
-
-        return rootNode;
-    }
-
-    @Override
     public void DisplayInOrderIterator(Node node) {
         if (node.left != null) {
             System.out.println("");
@@ -163,23 +87,6 @@ public class BinaryTreeSearchAdt<T extends Comparable<T>> implements BinaryTreeS
     @Override
     public Node getRoot() {
         return root;
-    }
-
-    private class ReturnObject {
-
-        private T item;
-
-        private ReturnObject(T entry) {
-            item = entry;
-        }
-
-        public T get() {
-            return item;
-        }
-
-        public void set(T entry) {
-            item = entry;
-        }
     }
 
     @Override

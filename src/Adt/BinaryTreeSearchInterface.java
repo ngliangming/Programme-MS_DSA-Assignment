@@ -1,7 +1,5 @@
 package Adt;
 
-import java.util.List;
-
 /**
  *
  * @author Ng Liang Ming
@@ -9,26 +7,31 @@ import java.util.List;
 public interface BinaryTreeSearchInterface<T extends Comparable<T>> {
 
     public boolean contains(T entry);
-    //Checks if exist
+    //Description: Checks if an entry already exist
+    //Post Condition: Returns boolean
 
     public T getEntry(T entry);
-    //Gets entry
+    //Description: Gets the existing entry
+    //Post Condition: Returns T entry
     
     public T add(T newEntry, String key, int id);
-    //Add new entry
-
-    public T remove(T entry);
-    //Remove existing entry
+    //Description: Add new entry into binary tree
+    //Post Condition: Entry is added to binary tree
 
     public boolean isEmpty();
-    //Is node empty?
+    //Description: Checks if the binary tree is empty
+    //Post Condition: Returns boolean
 
     public void clear();
-    //Clear node
+    //Description: Clears binary tree of all nodes
+    //Post Condition: Root is set to null, nodes effectively cleared
 
     public BinaryTreeSearchAdt.Node getRoot();
+    //Description: Gets root of binary tree
+    //Post Condition: Root node is returned
     
     public void DisplayInOrderIterator(BinaryTreeSearchAdt<T>.Node node);
-    //Displays in in-order iterations
+    //Description: Displays binary tree in in-order iterations
+    //Post Condition: Binary tree is displayed in-order
 
 }
