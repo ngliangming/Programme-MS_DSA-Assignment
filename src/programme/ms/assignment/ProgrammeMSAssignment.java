@@ -6,11 +6,13 @@ import java.util.ArrayList;
 import java.util.List;
 import static programme.ms.assignment.SortingDriver.sortmenu;
 import static programme.ms.assignment.BinaryTreeDriver.binaryTreeMenu;
+import static programme.ms.assignment.FilterCourseDriver.displayCourse;
 
 public class ProgrammeMSAssignment {
     //Glogal array lists for global access to all data
     public static List<Faculty> facultyList = new ArrayList();
-    public static List<Lecturer> lecturerList = new ArrayList();
+    public static List<Lecturer> lecturerList = new ArrayList();    
+    public static List<Course> courseList = new ArrayList();
 
     public static void main(String[] args) {
         //Initialize all data
@@ -26,6 +28,7 @@ public class ProgrammeMSAssignment {
             System.out.println("==========Programme Management System==========\n"
                     + "1. Faculty (Sorting List)\n"
                     + "2. Lecturers (Binary Tree)\n"
+                    + "4. Course (Filter)\n"
                     + "0. Exit\n");
             System.out.printf("> ");
             
@@ -40,6 +43,9 @@ public class ProgrammeMSAssignment {
                     break;
                 case "2":
                     binaryTreeMenu();
+                    break;
+                case "4":
+                    displayCourse();
                     break;
                 default:
                     System.out.println("Invalid Option");
@@ -69,6 +75,18 @@ public class ProgrammeMSAssignment {
         lecturerList.add(new Lecturer(Lecturer.idIndex++, "Josaphine", "012-165-7821", "jsphn_tuit@gmail.com"));
         lecturerList.add(new Lecturer(Lecturer.idIndex++, "Adam", "016-665-8942", "adm_jnsn@gmail.com"));
         lecturerList.add(new Lecturer(Lecturer.idIndex++, "Jason", "017-134-4953", "jason_v@gmail.com"));
+        
+        //Generate Course array list
+        courseList.add(new Course("PRINCIPLES OF ACCOUNTING", "BBFA1043",3));
+        courseList.add(new Course("DATA STRUCTURES AND ALGORITHMS", "BACS2063",3));
+        courseList.add(new Course("ENGLISH LANGUAGE", "BHEL1013",3));
+        courseList.add(new Course("DATABASE MANAGEMENT", "BACS1053",3));
+        courseList.add(new Course("PROBLEM SOLVING AND PROGRAMMING", "BACS1014",4));
+        courseList.add(new Course("ENTERPRISE SYSTEMS", "BAIT1133",3));
+        courseList.add(new Course("DATA WAREHOUSE TECHNOLOGY", "BAIT3003",3));
+        courseList.add(new Course("INFORMATION SYSTEMS IMPLEMENTATION", "BAIT3023",3));
+        courseList.add(new Course("QUANTITATIVE METHODS", "FPMA1024",4));
+        courseList.add(new Course("ORGANISATION DEVELOPMENT & CHANGE", "BBDH2083",3));
     }
 
     //Function for "Press enter to continue..." for users to read displays before proceeding
