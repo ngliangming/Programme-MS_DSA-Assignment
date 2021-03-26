@@ -1,4 +1,5 @@
 package entity;
+
 /**
  *
  * @author kahhim
@@ -8,7 +9,9 @@ public class Faculty implements Comparable<Faculty> {
     private String FCode;
     private String FName;
 
-    public Faculty() {
+    public Faculty(String FCode) {
+
+        this.FCode = FCode;
     }
 
     public Faculty(String FCode, String FName) {
@@ -34,12 +37,15 @@ public class Faculty implements Comparable<Faculty> {
 
     @Override
     public String toString() {
-        return  FCode + " " + FName;
+        return FCode + " " + FName;
     }
-    
-    @Override
+
     public int compareTo(Faculty f) {
         return FCode.compareTo(f.FCode);
-    
+
+    }
+
+    public int hashCode() {
+        return FCode.hashCode();
     }
 }
