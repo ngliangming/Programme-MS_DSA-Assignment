@@ -7,7 +7,7 @@ package programme.ms.assignment;
 import java.util.Scanner;
 import Adt.FilterCourse;
 import Adt.FilterCourseInterface;
-import entity.Course;
+import entity.*;
 import java.util.List;
 import java.util.stream.Stream;
 import static programme.ms.assignment.ProgrammeMSAssignment.*;
@@ -27,7 +27,7 @@ public class FilterCourseDriver {
         String selection1;
 
         for (int i = 0; i < courseList.size(); i++) {
-            course.add(new Course(courseList.get(i).getCourseName(), courseList.get(i).getCourseCode(), courseList.get(i).getCreditHours()));
+            course.add(new Course(courseList.get(i).getSessionId(), courseList.get(i).getCourseName(), courseList.get(i).getCourseCode(), courseList.get(i).getCreditHours(), courseList.get(i).getLecturer(), courseList.get(i).getProgramme()));
         }
 
         do {
@@ -52,7 +52,7 @@ public class FilterCourseDriver {
                     break;
                 case "3": {
                     boolean exit1 = false;
-                    
+
                     do {
                         filterCourseMenu(); //display menu
                         selection1 = scanCH.nextLine();//get input for selection
@@ -60,7 +60,7 @@ public class FilterCourseDriver {
                         switch (selection1) {
                             case "0":
                                 System.out.println("\nExiting Module...");
-                                exit1=true;
+                                exit1 = true;
                                 break;
                             case "1":
                                 creditHours3(); //filter credit hours 3
@@ -76,7 +76,7 @@ public class FilterCourseDriver {
                         }
                     } while (!exit1);
                     break;
-                            
+
                 }
 
                 default:
@@ -95,7 +95,7 @@ public class FilterCourseDriver {
         System.out.println("1. Filter by Credit Hours 3");
         System.out.println("2. Filter by Credit Hours 4");
         System.out.println("0. Exit filter");
-        System.out.print("What you want to filter? ");
+        System.out.print("\nWhat you want to filter? ");
         System.out.print("> ");
     }
 
@@ -114,7 +114,15 @@ public class FilterCourseDriver {
     public static void newCourseMenu() {
         String newCourseName;
         String newCourseCode;
-        int newCreditHours;
+        int newCreditHours = 3;
+        Lecturer newLecturer = new Lecturer();
+        Programme newProgramme = new Programme();
+        String query;
+        String selection;
+        boolean cancel = false;
+
+        boolean invalid;
+        boolean endSelection;
 
         Scanner newScanner = new Scanner(System.in);
         boolean again = true;
@@ -125,14 +133,109 @@ public class FilterCourseDriver {
 
             System.out.println("Enter course code: ");
             newCourseCode = newScanner.nextLine();
+            do {
+                try {
+                    System.out.println("Enter credit hours: ");
+                    newCreditHours = newScanner.nextInt();
+                    if (newCreditHours < 3 || newCreditHours > 4) {
+                        System.out.println("Invalid input!!!");
+                        invalid = true;
+                    } else {
+                        invalid = false;
+                    }
+                } catch (Exception e) {
+                    invalid = true;
+                    System.out.println("Invalid input!!!");
+                    newScanner.nextLine();
+                }
 
-            System.out.println("Enter credit hours: ");
-            newCreditHours = newScanner.nextInt();
+            } while (invalid);
+            boolean exists = false;
 
-            course.add(new Course(newCourseName, newCourseCode, newCreditHours));
-            courseList.add(new Course(newCourseName, newCourseCode, newCreditHours));
+            newScanner.nextLine();
+            while (!exists) {
+                System.out.println("Enter Lecturer Id: ");
+                query = newScanner.nextLine();
 
-            String selection;
+                for (int i = 0; i < lecturerList.size(); i++) {
+                    if (query.equals(String.valueOf(lecturerList.get(i).getStaffId()))) {
+                        newLecturer = lecturerList.get(i);
+                        exists = true;
+                    }
+                }
+
+                if (!exists) {
+                    do {
+                        System.out.println("Invalid Staff Id, open Lecturer Menu? (H)"
+                                + "\nRetry? (Y/N)");
+                        selection = newScanner.nextLine();
+                        switch (selection.toUpperCase()) {
+                            case "Y":
+                                endSelection = true;
+                                break;
+                            case "N":
+                                exists = true;
+                                cancel = true;
+                                endSelection = true;
+                                break;
+                            case "H":
+                                BinaryTreeDriver.binaryTreeMenu();
+                                endSelection = true;
+                                break;
+                            default:
+                                System.out.println("Invalid option");
+                                endSelection = false;
+                                break;
+                        }
+                    } while (!endSelection);
+                }
+
+            }
+
+            exists = false;
+            while (!exists && !cancel) {
+                System.out.println("Enter Programme Code: ");
+                query = newScanner.nextLine();
+
+                for (int i = 0; i < programmeList.size(); i++) {
+                    if (query.equals(programmeList.get(i).getProgrammeCode())) {
+                        newProgramme = programmeList.get(i);
+                        exists = true;
+                    }
+                }
+
+                if (!exists) {
+                    do {
+                        System.out.println("Invalid Staff Id, open Lecturer Menu? (H)"
+                                + "\nRetry? (Y/N)");
+                        selection = newScanner.nextLine();
+                        switch (selection.toUpperCase()) {
+                            case "Y":
+                                endSelection = true;
+                                break;
+                            case "N":
+                                exists = true;
+                                cancel = true;
+                                endSelection = true;
+                                break;
+                            case "H":
+                                System.out.println("TO BE IMPLEMENTED!!!");//!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+                                endSelection = true;
+                                break;
+                            default:
+                                System.out.println("Invalid option");
+                                endSelection = false;
+                                break;
+                        }
+                    } while (!endSelection);
+                }
+
+            }
+
+            if (!cancel) {
+                course.add(new Course(newCourseCode + Course.sessionIndex++, newCourseName, newCourseCode, newCreditHours, newLecturer, newProgramme));
+                courseList.add(new Course(newCourseCode + Course.sessionIndex++, newCourseName, newCourseCode, newCreditHours, newLecturer, newProgramme));
+            }
             boolean validOption;
             Scanner addMore = new Scanner(System.in);
 

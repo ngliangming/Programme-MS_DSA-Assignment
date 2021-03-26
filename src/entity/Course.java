@@ -9,50 +9,93 @@ package entity;
  *
  * @author wong-
  */
-public class Course implements Comparable<Course>{
-    private String CourseName;
-    private String CourseCode;
-    private int CreditHours;
+public class Course implements Comparable<Course> {
 
-    public Course(){
+    public static int sessionIndex = 1001;
+
+    private String sessionId;
+    private String courseName;
+    private String courseCode;
+    private int creditHours;
+
+    private Lecturer lecturer;
+    private Programme programme;
+
+    public Course() {
 
     }
-    
-    public Course(String CourseName, String CourseCode, int CreditHours) {
-        this.CourseName = CourseName;
-        this.CourseCode = CourseCode;
-        this.CreditHours = CreditHours;
+
+//    public Course(String CourseName, String CourseCode, int CreditHours) {
+//        this.courseName = CourseName;
+//        this.courseCode = CourseCode;
+//        this.creditHours = CreditHours;
+//    }
+
+    public Course(String sessionId, String courseName, String courseCode, int creditHours, Lecturer lecturer, Programme programme) {
+        this.sessionId = sessionId;
+        this.courseName = courseName;
+        this.courseCode = courseCode;
+        this.creditHours = creditHours;
+        this.lecturer = lecturer;
+        this.programme = programme;
+    }
+
+    public void setSessionId(String sessionId) {
+        this.sessionId = sessionId;
+    }
+
+    public void setLecturer(Lecturer lecturer) {
+        this.lecturer = lecturer;
+    }
+
+    public void setProgramme(Programme programme) {
+        this.programme = programme;
+    }
+
+    public String getSessionId() {
+        return sessionId;
+    }
+
+    public Lecturer getLecturer() {
+        return lecturer;
+    }
+
+    public Programme getProgramme() {
+        return programme;
     }
 
     public String getCourseName() {
-        return CourseName;
+        return courseName;
     }
 
     public void setCourseName(String CourseName) {
-        this.CourseName = CourseName;
+        this.courseName = CourseName;
     }
 
     public String getCourseCode() {
-        return CourseCode;
+        return courseCode;
     }
 
     public void setCourseCode(String CourseCode) {
-        this.CourseCode = CourseCode;
+        this.courseCode = CourseCode;
     }
 
     public int getCreditHours() {
-        return CreditHours;
+        return creditHours;
     }
 
     public void setCreditHours(int CreditHours) {
-        this.CreditHours = CreditHours;
+        this.creditHours = CreditHours;
     }
 
     @Override
     public String toString() {
-        return "Course Name  = " + CourseName + 
-               "\nCourse Code  = " + CourseCode + 
-               "\nCredit Hours = " + CreditHours + "\n";
+        return "Session ID = " + sessionId
+                + "\nCourse Name  = " + courseName
+                + "\nCourse Code  = " + courseCode
+                + "\nCredit Hours = " + creditHours
+                + "\nLecturer = " + lecturer.getName()
+                + "\nProgramme = " + programme.getProgrammeCode() + "\n";
     }
 
     @Override
@@ -60,7 +103,4 @@ public class Course implements Comparable<Course>{
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
-    
-    
-    
 }

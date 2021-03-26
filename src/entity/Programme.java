@@ -11,4 +11,16 @@ package entity;
  */
 public class Programme {
 //    IMPLEMENT
+    public String getProgrammeCode(){
+        String error = "REI";
+        return error;
+    };
+
+    @Override
+    public String toString() {
+        String error = "This has not been implemented yes\n";
+        return error;
+    }
+    
+    
 }
