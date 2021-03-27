@@ -7,8 +7,7 @@ package programme.ms.assignment;
 
 import Adt.HashInterface;
 import Adt.HashImplement;
-import entity.Faculty;
-import entity.Programme;
+import entity.*;
 import java.util.Scanner;
 import static programme.ms.assignment.ProgrammeMSAssignment.*;
 
@@ -17,14 +16,14 @@ import static programme.ms.assignment.ProgrammeMSAssignment.*;
  * @author darks
  */
 public class Hashing {
-//!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!Change To Programme!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-    public static HashInterface<Integer, Faculty> programmeTable = new HashImplement<>(71);
+
+    public static HashInterface<Integer, Programme> programmeTable = new HashImplement<>(71);
 
     public static void hashIndexing() {
         programmeTable.clear();
-//!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!Change To Programme!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-        for (int i = 0; i < facultyList.size(); i++) {
-            programmeTable.add(facultyList.get(i).hashCode(), facultyList.get(i));
+
+        for (int i = 0; i < programmeList.size(); i++) {
+            programmeTable.add(programmeList.get(i).hashCode(), programmeList.get(i));
         }
 
         hashMenu();
@@ -51,7 +50,6 @@ public class Hashing {
                 case "1":
                     displayHashTable();
                     entContinue();
-                    exit = true;
                     break;
                 case "2":
                     cls();
@@ -79,7 +77,7 @@ public class Hashing {
 
             String progNameToSearch = sc.nextLine();
 //!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!Change To Programme!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-            Faculty progToSearch = new Faculty(progNameToSearch);
+            Programme progToSearch = new Programme(progNameToSearch);
 
             if (programmeTable.contains(progToSearch.hashCode())) {
                 System.out.println(programmeTable.getValue(progToSearch.hashCode()));
@@ -87,15 +85,15 @@ public class Hashing {
                 System.err.println("Record not found!");
             }
 
-            char yesNo;
+            String yesNo;
 
             System.out.print("\nDo you want to search another programme? (Y/N): ");
-            yesNo = Character.toUpperCase(sc.nextLine().charAt(0));
+            yesNo = sc.nextLine();
             switch (yesNo) {
-                case 'Y':
+                case "Y":
                     cls();
                     break;
-                case 'N':
+                case "N":
                     repeatSearch = false;
                     cls();
                     return;
@@ -108,54 +106,116 @@ public class Hashing {
     public static void hashAdd() {
         Scanner sc = new Scanner(System.in);
         boolean repeatAdd = true;
+        boolean exists = false;
+        String query = "";
+        String selection = "";
+        boolean endSelection;
+        boolean cancel = false;
+        boolean again;
 
         do {
-            String FCode, FName;
+            String PCode, PName;
             //!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!Change To Programme!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-            int lvlOfStudyOpt, facultyOpt, duration;
-            Faculty faculty = null;
+            int lvlOfStudyOpt, programOpt, duration;
+            Programme programme = null;
+            Faculty faculty = new Faculty();
+            String response;
+            boolean invalid = false;
+
             /**
              * NEED TO CHANGE TO FACULTY CLASS
              */
-
             System.out.print("                Add A Programme\n");
             System.out.println("------------------------------------------------\n");
-            System.out.print("\nProgram name: ");
-            FCode = sc.nextLine();
 
-            System.out.print("\nLevel Of Study: ");
-            FName = sc.nextLine();
-//!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!Change To Programme!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-            Faculty newProg = new Faculty(FCode, FName);
-
-            String response;
-            System.out.print("Enter (Y/N): ");
-            boolean invalid = false;
-            cls();
             do {
-                System.out.println("Are you sure you want to add the following programme?");
-                System.out.println("Program Name: " + newProg.getFCode());
-                System.out.println("Level of Study: " + newProg.getFName());
+                again = false;
+                System.out.print("\nProgram code: ");
+                PCode = sc.nextLine();
 
-                response = sc.nextLine().toUpperCase();
-                switch (response) {
-                    case "Y":
-                        invalid = false;
-                        programmeTable.add(newProg.hashCode(), newProg);
-//E!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!ADD TO LIST HERE!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-                        System.out.println(newProg.getFCode() + " in " + newProg.getFName() + " has been added.");
-                        cls();
+                for (int i = 0; i < programmeList.size(); i++) {
+                    if (PCode.equals(programmeList.get(i).getPCode())) {
+                        System.out.println("Programe code already exists");
+                        again = true;
                         break;
-                    case "N":
-                        invalid = false;
-                        repeatAdd = false;
-                        cls();
-                        return;
-                    default:
-                        invalid = true;
-                        System.err.println("Please enter a valid selection!");
+                    }
                 }
-            } while (invalid);
+            } while (again);
+
+            System.out.print("\nProgram name: ");
+            PName = sc.nextLine();
+
+            exists = false;
+            while (!exists) {
+                System.out.println("Enter Faculty Code: ");
+                query = sc.nextLine();
+
+                for (int i = 0; i < facultyList.size(); i++) {
+                    if (query.equals(String.valueOf(facultyList.get(i).getFCode()))) {
+                        faculty = facultyList.get(i);
+                        exists = true;
+                    }
+                }
+
+                if (!exists) {
+                    do {
+                        System.out.println("\nInvalid Faculty Code, open Faculty Menu? (H)"
+                                + "\nRetry? (Y/N)");
+                        selection = sc.nextLine();
+                        switch (selection.toUpperCase()) {
+                            case "Y":
+                                endSelection = true;
+                                break;
+                            case "N":
+                                exists = true;
+                                cancel = true;
+                                endSelection = true;
+                                break;
+                            case "H":
+                                SortingDriver.sortmenu();
+                                endSelection = true;
+                                break;
+                            default:
+                                System.out.println("Invalid option");
+                                endSelection = false;
+                                break;
+                        }
+                    } while (!endSelection);
+                }
+
+            }
+
+            if (!cancel) {
+                Programme newProg = new Programme(PCode, PName, faculty);
+
+                System.out.print("Enter (Y/N): ");
+                cls();
+                do {
+                    System.out.println("Are you sure you want to add the following programme?");
+                    System.out.println("Program Code: " + newProg.getPCode());
+                    System.out.println("Program Name: " + newProg.getPName());
+                    System.out.println("Faculty: " + newProg.getFaculty());
+
+                    response = sc.nextLine().toUpperCase();
+                    switch (response) {
+                        case "Y":
+                            invalid = false;
+                            programmeTable.add(newProg.hashCode(), newProg);
+                            programmeList.add(newProg);
+                            System.out.println(newProg.getPCode() + " in " + newProg.getPName() + " has been added.");
+                            cls();
+                            break;
+                        case "N":
+                            invalid = false;
+                            repeatAdd = false;
+                            cls();
+                            return;
+                        default:
+                            invalid = true;
+                            System.err.println("Please enter a valid selection!");
+                    }
+                } while (invalid);
+            }
 
             do {
                 System.out.print("\nDo you want to add another programme? (Y/N): ");

@@ -27,7 +27,7 @@ public class HashImplement <K, V> implements HashInterface <K, V>, Serializable 
       } else {
         Node<K, V> currentNode = hashTable[index];
         while (currentNode != null) {
-          outputStr += currentNode.key + " " + currentNode.value + ", ";
+          outputStr += currentNode.key + " " + currentNode.value + " ";
           currentNode = currentNode.next;
         } 
 
@@ -122,18 +122,12 @@ public class HashImplement <K, V> implements HashInterface <K, V>, Serializable 
     } 
 
     if (currentNode != null) {
-      // key found; get value for return
       result = currentNode.value;
     } 
-    // else not found; result is null
 
     return result;
   }
 
-// rehash changes a bit from open addressing
-  /**
-   * Task: Increases the size of the hash table to a prime > twice its old size.
-   */
   private void rehash() {
     Node<K, V>[] oldTable = hashTable;
     int oldSize = oldTable.length;
@@ -141,12 +135,8 @@ public class HashImplement <K, V> implements HashInterface <K, V>, Serializable 
 
     hashTable = new Node[newSize];
 
-    numberOfEntries = 0; // reset number of dictionary entries, since
-    // it will be incremented by add during rehash
-
-    // rehash dictionary entries from old array to new, bigger array.
+    numberOfEntries = 0;
     for (int index = 0; index < oldSize; ++index) {
-      // rehash chain in old table
       Node<K, V> currentNode = oldTable[index];
 
       while (currentNode != null) { 
@@ -167,17 +157,10 @@ public class HashImplement <K, V> implements HashInterface <K, V>, Serializable 
     numberOfEntries = 0;
   }
 
-  /**
-   * @return true if lambda > MAX_LOAD_FACTOR for hash table; otherwise returns
-   * false.
-   */
   private boolean isHashTableTooFull() {
     return numberOfEntries > MAX_LOAD_FACTOR * hashTable.length;
   }
 
-// the following methods that appear between the dashed lines
-// are the same as for open addressing
-// ----------------------------------------------------------
   public boolean contains(K key) {
     return getValue(key) != null;
   } 

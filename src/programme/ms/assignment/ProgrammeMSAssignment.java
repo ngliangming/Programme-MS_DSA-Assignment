@@ -1,8 +1,8 @@
 /*
     TODO
     ====
-    Re-implement/check the "getProgrammeCode()" in Course.java
-    Assign programmes to courses in initializeData();
+    
+    
     Course.java, line 222, add in support for opening programme menu. Also implement correctly getting programme codes
  */
 package programme.ms.assignment;
@@ -90,14 +90,14 @@ public class ProgrammeMSAssignment {
         lecturerList.add(new Lecturer(Lecturer.idIndex++, "Jason", "017-134-4953", "jason_v@gmail.com"));
 
         //Generate Programme array list
-        programmeList.add(new Programme());
-        programmeList.add(new Programme());
-        programmeList.add(new Programme());
-        programmeList.add(new Programme());
-        programmeList.add(new Programme());
-        programmeList.add(new Programme());
-        programmeList.add(new Programme());
-        programmeList.add(new Programme());
+        programmeList.add(new Programme("REI2", "DIPLOMA IN IT",facultyList.get(4)));
+        programmeList.add(new Programme("REI1", "DIPLOMA IN PC",facultyList.get(2)));
+        programmeList.add(new Programme("REI5", "DIPLOMA IN ASD",facultyList.get(1)));
+        programmeList.add(new Programme("REI4", "DIPLOMA IN QWE",facultyList.get(3)));
+        programmeList.add(new Programme("REI7", "DIPLOMA IN ERT",facultyList.get(0)));
+        programmeList.add(new Programme("REI2", "DIPLOMA IN IXCV",facultyList.get(5)));
+        programmeList.add(new Programme("REI9", "DIPLOMA IN LKJH",facultyList.get(3)));
+        programmeList.add(new Programme("REI0", "DIPLOMA IN ZXC",facultyList.get(2)));
         
         //Generate Course array list
         courseList.add(new Course("BBFA1043 " + Course.sessionIndex++, "PRINCIPLES OF ACCOUNTING", "BBFA1043", 3, lecturerList.get(2), programmeList.get(4)));

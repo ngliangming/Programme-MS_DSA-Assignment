@@ -7,20 +7,66 @@ package entity;
 
 /**
  *
- * @author Ng Liang Ming
+ * @author Brandon Choong
  */
 public class Programme {
-//    IMPLEMENT
-    public String getProgrammeCode(){
-        String error = "REI";
-        return error;
-    };
+
+    private String PCode;
+    private String PName;
+    private Faculty faculty;
+
+    public Programme() {
+    }
 
     @Override
     public String toString() {
-        String error = "This has not been implemented yes\n";
-        return error;
+        return "Programme Code = " + PCode
+                + "\nProgramme Name  = " + PName
+                + "\nFaculty = " + faculty.getFCode() + "\n";
     }
-    
-    
+
+    public Programme(String PCode) {
+
+        this.PCode = PCode;
+    }
+
+    public Programme(String PCode, String PName, Faculty faculty) {
+        this.PCode = PCode;
+        this.PName = PName;
+        this.faculty = faculty;
+    }
+
+    public String getPCode() {
+        return PCode;
+    }
+
+    public void setPCode(String PCode) {
+        this.PCode = PCode;
+    }
+
+    public String getPName() {
+        return PName;
+    }
+
+    public void setPName(String PName) {
+        this.PName = PName;
+    }
+
+    public void setFaculty(Faculty faculty) {
+        this.faculty = faculty;
+    }
+
+    public Faculty getFaculty() {
+        return faculty;
+    }
+
+    public int compareTo(Programme p) {
+        return PCode.compareTo(p.PCode);
+
+    }
+
+    public int hashCode() {
+        return PCode.hashCode();
+    }
+
 }

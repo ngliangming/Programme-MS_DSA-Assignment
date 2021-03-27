@@ -32,7 +32,7 @@ public class SortingDriver {
                     + "1. View Faculties\n"
                     + "2. Add new Faculty\n"
                     + "3. Sort Faculties\n"
-                    + "0. Main Menu\n");
+                    + "0. Exit\n");
             System.out.printf("> ");
 
             selection = scanner.nextLine();

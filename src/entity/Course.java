@@ -95,7 +95,7 @@ public class Course implements Comparable<Course> {
                 + "\nCourse Code  = " + courseCode
                 + "\nCredit Hours = " + creditHours
                 + "\nLecturer = " + lecturer.getName()
-                + "\nProgramme = " + programme.getProgrammeCode() + "\n";
+                + "\nProgramme = " + programme.getPCode() + "\n";
     }
 
     @Override

@@ -10,6 +10,7 @@ import Adt.FilterCourseInterface;
 import entity.*;
 import java.util.List;
 import java.util.stream.Stream;
+import static programme.ms.assignment.Hashing.hashIndexing;
 import static programme.ms.assignment.ProgrammeMSAssignment.*;
 
 public class FilterCourseDriver {
@@ -198,7 +199,7 @@ public class FilterCourseDriver {
                 query = newScanner.nextLine();
 
                 for (int i = 0; i < programmeList.size(); i++) {
-                    if (query.equals(programmeList.get(i).getProgrammeCode())) {
+                    if (query.equals(programmeList.get(i).getPCode())) {
                         newProgramme = programmeList.get(i);
                         exists = true;
                     }
@@ -219,7 +220,7 @@ public class FilterCourseDriver {
                                 endSelection = true;
                                 break;
                             case "H":
-                                System.out.println("TO BE IMPLEMENTED!!!");//!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+                                hashIndexing();
                                 endSelection = true;
                                 break;
                             default:
