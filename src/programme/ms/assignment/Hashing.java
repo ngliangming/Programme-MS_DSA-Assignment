@@ -191,7 +191,7 @@ public class Hashing {
                 System.out.print("Enter (Y/N): ");
                 cls();
                 do {
-                    System.out.println("Are you sure you want to add the following programme?");
+                    System.out.println("Are you sure you want to add the following programme? (Y/N)");
                     System.out.println("Program Code: " + newProg.getPCode());
                     System.out.println("Program Name: " + newProg.getPName());
                     System.out.println("Faculty: " + newProg.getFaculty());
