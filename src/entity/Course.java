@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package entity;
 
 /**
@@ -25,11 +20,9 @@ public class Course implements Comparable<Course> {
 
     }
 
-//    public Course(String CourseName, String CourseCode, int CreditHours) {
-//        this.courseName = CourseName;
-//        this.courseCode = CourseCode;
-//        this.creditHours = CreditHours;
-//    }
+    public Course(int creditHours) {
+        this.creditHours = creditHours;
+    }
 
     public Course(String sessionId, String courseName, String courseCode, int creditHours, Lecturer lecturer, Programme programme) {
         this.sessionId = sessionId;
@@ -98,9 +91,30 @@ public class Course implements Comparable<Course> {
                 + "\nProgramme = " + programme.getPCode() + "\n";
     }
 
+    public boolean equals(Course c) {
+        if (!c.getCourseCode().equals(this.courseCode)) {
+            return false;
+        }
+
+        if (!c.getCourseName().equals(this.courseName)) {
+            return false;
+        }
+
+        if (this.creditHours != c.getCreditHours()) {
+            return false;
+        }
+        
+        return true;
+    }
+
     @Override
-    public int compareTo(Course o) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public int compareTo(Course c) {
+        if(this.creditHours<c.creditHours)
+            return -1;
+        else if(this.creditHours>c.creditHours)
+            return 1;
+        else
+            return 0;
     }
 
 }
