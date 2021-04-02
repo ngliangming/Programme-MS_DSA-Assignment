@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package Adt;
 
 /**
@@ -15,4 +10,7 @@ public interface FilterCourseInterface<T extends Comparable<T>> {
     public boolean isEmpty();
     public void clear();
     public int getSize();
+    public T remove(int givenPosition);
+    
+    public void filter(T newEntrys);
 }

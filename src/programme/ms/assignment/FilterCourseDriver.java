@@ -36,6 +36,7 @@ public class FilterCourseDriver {
             System.out.println("1. View course list");
             System.out.println("2. Add new course");
             System.out.println("3. Filter course");
+            System.out.println("4. Delete a course");
             System.out.println("0. Exit course module");
             System.out.print("> ");
             selection = scanner.nextLine();
@@ -77,9 +78,11 @@ public class FilterCourseDriver {
                         }
                     } while (!exit1);
                     break;
-
                 }
-
+                case "4":
+                    deleteMenu();
+                    entContinue();
+                    break;
                 default:
                     System.out.println("Invalid option");
                     break;
@@ -102,14 +105,14 @@ public class FilterCourseDriver {
 
     public static void creditHours3() { //ch 3 filter 
         System.out.println("\n\n");
-        FilterList = forFilter.stream().filter(p -> p.getCreditHours() == 3);
-        FilterList.forEach(p -> System.out.println(p.toString()));
+        Course c2 = new Course(3);
+        course.filter(c2);
     }
 
     public static void creditHours4() { //ch 4 filter 
         System.out.println("\n\n");
-        FilterList = forFilter.stream().filter(p -> p.getCreditHours() == 4);
-        FilterList.forEach(p -> System.out.println(p.toString()));
+        Course c2 = new Course(4);
+        course.filter(c2);
     }
 
     public static void newCourseMenu() {
@@ -129,14 +132,27 @@ public class FilterCourseDriver {
         boolean again = true;
 
         do {
-            System.out.println("Enter course name: ");
+            System.out.print("Enter course name: ");
             newCourseName = newScanner.nextLine();
+            boolean againC;
 
-            System.out.println("Enter course code: ");
-            newCourseCode = newScanner.nextLine();
+            do {
+                againC = false;
+                System.out.print("Enter course code: ");
+                newCourseCode = newScanner.nextLine().toUpperCase();
+
+                for (int i = 0; i < courseList.size(); i++) {
+                    if (newCourseCode.equals(courseList.get(i).getCourseCode())) {
+                        System.out.println("Course code already exists");
+                        againC = true;
+                        break;
+                    }
+                }
+            } while (againC);
+
             do {
                 try {
-                    System.out.println("Enter credit hours: ");
+                    System.out.print("Enter credit hours: ");
                     newCreditHours = newScanner.nextInt();
                     if (newCreditHours < 3 || newCreditHours > 4) {
                         System.out.println("Invalid input!!!");
@@ -155,7 +171,7 @@ public class FilterCourseDriver {
 
             newScanner.nextLine();
             while (!exists) {
-                System.out.println("Enter Lecturer Id: ");
+                System.out.print("Enter Lecturer Id: ");
                 query = newScanner.nextLine();
 
                 for (int i = 0; i < lecturerList.size(); i++) {
@@ -195,7 +211,7 @@ public class FilterCourseDriver {
 
             exists = false;
             while (!exists && !cancel) {
-                System.out.println("Enter Programme Code: ");
+                System.out.print("Enter Programme Code: ");
                 query = newScanner.nextLine();
 
                 for (int i = 0; i < programmeList.size(); i++) {
@@ -265,5 +281,91 @@ public class FilterCourseDriver {
             } while (!validOption);
         } while (again);
 
+    }
+
+    private static void deleteMenu() {
+        int cidRemove = 0;
+
+        Scanner scanDel = new Scanner(System.in);
+
+        for (int i = 0; i < courseList.size(); i++) {
+            int id = i + 1;
+            System.out.println("Course id : " + id
+                    + "\nCourse Name  : " + courseList.get(i).getCourseName()
+                    + "\nCourse code  : " + courseList.get(i).getCourseCode()
+                    + "\nCredit Hours : " + courseList.get(i).getCreditHours() + "\n");
+        }
+
+        boolean exit = false;
+        do {
+
+            try {
+                System.out.print("\nEnter the course number you want to remove : ");
+                cidRemove = scanDel.nextInt();
+                
+                if (cidRemove <= courseList.size()) {
+                    exit = true;
+                } else {
+                    System.out.println("Error course number detected. Please re-enter a valid number.");
+                    exit = false;
+                }
+                
+            } catch (Exception e) {
+                System.out.println("Invalid input! Please enter an integer.");
+                scanDel.nextLine();
+                exit=false;
+            }
+        } while (!exit);
+
+        for (int i = 0; i < courseList.size(); i++) {
+            int id = i + 1;
+            if (cidRemove == id) {
+                System.out.println("Course id : " + id
+                        + "\nCourse Name  : " + courseList.get(i).getCourseName()
+                        + "\nCourse code  : " + courseList.get(i).getCourseCode()
+                        + "\nCredit Hours : " + courseList.get(i).getCreditHours() + "\n");
+            }
+        }
+
+        boolean validOption = false;
+        boolean exit2 = false;
+        Scanner confirmDel = new Scanner(System.in);
+
+        do {
+            String delYN;
+            System.out.print("\nAre you sure you want to delete? (Y/N): ");
+
+            do {
+
+                try {
+                    delYN = confirmDel.nextLine();
+                    exit2 = true;
+
+                    switch (delYN.toUpperCase()) {
+                        case "Y":
+                            course.remove(cidRemove - 1);
+                            courseList.remove(cidRemove - 1);
+                            System.out.println("Course successfully deleted.");
+                            validOption = true;
+                            break;
+                        case "N":
+                            System.out.println("No couse was deleted.");
+                            validOption = true;
+                            break;
+                        case "":
+                            validOption = false;
+                            break;
+                        default:
+                            System.out.println("Invalid Option");
+                            validOption = false;
+                            break;
+                    }
+                } catch (Exception e) {
+                    System.out.println("Invalid input!");
+                    scanDel.nextLine();
+                }
+            } while (!exit2);
+
+        } while (!validOption);
     }
 }
