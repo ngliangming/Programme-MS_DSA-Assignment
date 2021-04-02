@@ -223,7 +223,7 @@ public class FilterCourseDriver {
 
                 if (!exists) {
                     do {
-                        System.out.println("Invalid Staff Id, open Lecturer Menu? (H)"
+                        System.out.println("Invalid Staff Id, open Programme Menu? (H)"
                                 + "\nRetry? (Y/N)");
                         selection = newScanner.nextLine();
                         switch (selection.toUpperCase()) {
